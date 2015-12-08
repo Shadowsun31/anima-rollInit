@@ -2,8 +2,8 @@
 // 2015
 // Initiative Generator for Anima Beyond Fantasy RPG
 //
-// let initiative = require('path/initiative');
-// let init = initiative();
+// let initiative = require('path/nodeInit');
+// let init = Initiative();
 
 // init.rollInit(base_init,modif,natura[,logEnabled]);
 // base_init Integer
@@ -38,15 +38,15 @@ function initiative(){
     switch (temp_init) {
       case 1: // if 1 is rolled => Great Fumble
         init += -125;
-        log += base_init + " !Fumble! -125 ";
+        log += base_init + " !01 Fumble! -125 ";
         break;
       case 2: // if 2 is rolled => Fumble
         init += -100;
-        log += base_init + " !Fumble! -100 ";
+        log += base_init + " !02 Fumble! -100 ";
         break;
       case 3: // if 3 is rolled => Little Fumble
         init += -75;
-        log += base_init + " !Fumble! -75 ";
+        log += base_init + " !03 Fumble! -75 ";
         break;
       default: // else normal init
         init += temp_init;
@@ -69,13 +69,32 @@ function initiative(){
     init += modif; // apply bonus/malus
 
     log += " + " + modif + " = " + init;
-    if(logEnabled) console.log(log);
 
+    let initWithLog = {
+      "log" : log,
+      "init": init
+    };
+
+    // return a JSON Obj with init details and init result
+    if(logEnabled) return initWithLog;
+    // return init result
     return init;
+  }
+
+  function rollInitFromJSON(json){
+    for (let i in json) {
+      let char = json[i];
+      let temp = rollInit(char.base_init, 0, char.natura, true);
+
+      char.detail_init = temp.log;
+      char.final_init = temp.init;
+      console.log(char);
+    }
   }
 
   var that = {};
   that.rollInit = rollInit;
+  that.rollInitFromJSON = rollInitFromJSON;
   return that;
 }
 
