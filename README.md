@@ -41,7 +41,7 @@ let initiative = require('path/nodeInit');
 let init = initiative();
 ```
 
-##### init.rollInit(base_init,modif,natura[,logEnabled])   
+#### init.rollInit(base_init,modif,natura[,logEnabled])   
 > base_init Integer  
 modif Integer  
 natura Integer  
@@ -99,7 +99,7 @@ init.rollInit(50, 15, 0, true);
 ```
 
 
-##### init.rollInitFromJSON(json)  
+#### init.rollInitFromJSON(json)  
 > json JSON Object that contain :   
 "natura" : Integer  
 "base_init" : Integer    
