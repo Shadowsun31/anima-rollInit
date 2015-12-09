@@ -3,12 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" href="stylesheet.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script type="text/javascript" src="ngInit.js"></script>
 </head>
 <body ng-app="app">
   <div ng-controller="initCtrl" ng-init="init()">
 
+
+
+    <ul>
+      <li>
+        <span class="bold titleSpan width2">Name:</span>
+        <span class="bold titleSpan width1">Natura:</span>
+        <span class="bold titleSpan width1">Base Init:</span>
+        <span class="bold titleSpan width1">Modif:</span>
+      </li>
+      <li ng-repeat="pj in pjs track by $index" >
+        <span class="width2">
+          {{pj.name}}
+        </span>
+        <span class="width1 center">
+          <input type="number" class="width1 center" ng-model="inputNatura" ng-change="changeNatura(pj,inputNatura)" value="{{pj.natura}}">
+        </span>
+        <span class="width1 center">
+          <input type="number" class="width1 center" ng-model="inputBaseInit" ng-change="changeBaseInit(pj,inputBaseInit)" value="{{pj.base_init}}">
+        </span>
+        <span class="width1 center">
+          <input type="number" class="width1 center" ng-model="inputModif" ng-change="changeModif(pj,inputModif)" value="{{pj.modif}}">
+        </span>
+      </li>
+      <li>
+        <input class="initGen width2 center" ng-model="newName" type="text">
+        <input class="initGen width1 center" ng-model="newNatura" type="Number">
+        <input class="initGen width1 center" ng-model="newBaseInit" type="Number">
+        <input class="initGen width1 center" ng-model="newModif" type="Number">
+        <button ng-click="addPJ()">+</button>
+      </li>
+      <li><button ng-click="generateInit()">Generate Init</button></li>
+    </ul>
+
+
+    <ul>
+      <li>
+        <span class="bold titleSpan width1">Order:</span>
+        <span class="bold titleSpan width2">Name:</span>
+        <span class="bold titleSpan width1">Init:</span>
+        <span class="bold titleSpan width3">Has played:</span>
+        <span class="bold titleSpan">Details:</span>
+      </li>
+      <li ng-repeat="char in chars track by $index">
+        <span class="width1 center">{{$index+1}}</span>
+        <span class="width1">{{char.name}}</span>
+        <span class="width1 center">{{char.final_init}}</span>
+        <span class="width3 center"><input ng-model="char.Selected" type="checkbox" ng-click="switchSelected(char.selected)"></span>
+        <span class="">{{char.detail_init}}</span>
+      </li>
+    </ul>
   </div>
 </body>
 </html>

@@ -8,32 +8,105 @@ let pjs;
 let app = angular.module("app",[]);
 
 app.controller("initCtrl", ["$scope", function($scope){
+  $scope.addPJ = function(){
+    $scope.newPJ = {
+      "name" : $scope.newName,
+      "natura" : $scope.newNatura,
+      "base_init" : $scope.newBaseInit,
+      "modif" : $scope.newModif
+    };
+    $scope.pjs.push($scope.newPJ);
+
+    $scope.newName = "";
+    $scope.newNatura = "";
+    $scope.newBaseInit = "";
+    $scope.newModif = "";
+    $scope.pjs.sort(sortByProperty('name'));
+  }
+
+  $scope.generateInit = function(){
+    $scope.chars = JSON.parse(JSON.stringify($scope.pjs));
+    rollInitFromJSON($scope.chars);
+
+    $scope.chars.sort(sortByProperty('final_init')).reverse();
+    angular.forEach($scope.chars, function (char) {
+        char.Selected = false;
+    });
+
+  }
+  $scope.switchSelected = function(val){
+    val = !val;
+  }
+  $scope.changeName = function(pj, val){
+    pj.name = val;
+  }
+  $scope.changeNatura = function(pj, val){
+    pj.natura = val;
+  }
+  $scope.changeBaseInit = function(pj, val){
+    pj.base_init = val;
+  }
+  $scope.changeModif = function(pj, val){
+    pj.modif = val;
+  }
+  $scope.removePJ = function(i){
+    $scope.pjs = $scope.pjs.slice(i, 1);
+  }
+
   $scope.init = function(){
+
+    $scope.pjs = [];
+    $scope.chars = [];
+
     pjs = {
       "pjs" : [
         {
-          "name" : "test",
-          "natura" : 0,
-          "base_init" : 50
+          "name" : "Torako",
+          "natura" : 15,
+          "base_init" : 150,
+          "modif" : 0
         },
         {
-          "name" : "bob",
+          "name" : "Bob",
           "natura" : 15,
-          "base_init" : 75
+          "base_init" : 75,
+          "modif" : 0
+        },
+        {
+          "name" : "Damon",
+          "natura" : 15,
+          "base_init" : 100,
+          "modif" : 0
+        },
+        {
+          "name" : "Elias",
+          "natura" : 15,
+          "base_init" : 100,
+          "modif" : 0
+        },
+        {
+          "name" : "Hendrix",
+          "natura" : 15,
+          "base_init" : 100,
+          "modif" : 0
         }
       ]};
 
-    for (let i in pjs.pjs) {
-      let pj = pjs.pjs[i];
+    $scope.pjs = pjs.pjs.sort(sortByProperty('name'));
+    $scope.chars = $scope.pjs;
 
-      console.log(rollInit(pj.base_init, 0, pj.natura, true));
-    };
 
-    rollInitFromJSON(pjs.pjs);
-    console.log(pjs);
   }
+
+
 }]);
 
+
+function sortByProperty(property) {
+    return function (x, y) {
+        return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+    };
+}
 
 function randomIntInc (low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
@@ -100,7 +173,7 @@ function rollInit(base_init, modif, natura, logEnabled){
 function rollInitFromJSON(json){
   for (let i in json) {
     let char = json[i];
-    let temp = rollInit(char.base_init, 0, char.natura, true);
+    let temp = rollInit(char.base_init, char.modif, char.natura, true);
 
     char.detail_init = temp.log;
     char.final_init = temp.init;

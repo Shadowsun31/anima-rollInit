@@ -1,0 +1,38 @@
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+span{
+  display: inline-block;
+  margin-right: 10px;
+}
+.bold{
+  font-weight: bold;
+}
+.center{
+  text-align: center;
+}
+.titleSpan{
+  text-align: left;
+}
+.initGen{
+  display: inline-block;
+  margin-right: 10px;
+}
+.width1{
+  width: 85px;
+}
+.width2{
+  width: 100px;
+}
+.width3{
+  width: 150px;
+}
+li{
+  list-style-type: none;
+}
