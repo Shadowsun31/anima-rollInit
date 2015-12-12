@@ -9,19 +9,24 @@ let app = angular.module("app",[]);
 
 app.controller("initCtrl", ["$scope", function($scope){
   $scope.addPJ = function(){
-    $scope.newPJ = {
-      "name" : $scope.newName,
-      "natura" : $scope.newNatura,
-      "base_init" : $scope.newBaseInit,
-      "modif" : $scope.newModif
-    };
-    $scope.pjs.push($scope.newPJ);
 
-    $scope.newName = "";
-    $scope.newNatura = "";
-    $scope.newBaseInit = "";
-    $scope.newModif = "";
-    $scope.pjs.sort(sortByProperty('name'));
+    if($scope.newName != null && $scope.newBaseInit != null){
+      if($scope.newNatura == null) $scope.newNatura = 5;
+      if($scope.newModif == null) $scope.newModif = 0;
+      $scope.newPJ = {
+        "name" : $scope.newName,
+        "natura" : $scope.newNatura,
+        "base_init" : $scope.newBaseInit,
+        "modif" : $scope.newModif
+      };
+      $scope.pjs.push($scope.newPJ);
+
+      $scope.newName = "";
+      $scope.newNatura = "";
+      $scope.newBaseInit = "";
+      $scope.newModif = "";
+      $scope.pjs.sort(sortByProperty('name'));
+    }
   }
 
   $scope.generateInit = function(){
@@ -36,6 +41,7 @@ app.controller("initCtrl", ["$scope", function($scope){
   }
   $scope.switchSelected = function(val){
     val = !val;
+    
   }
   $scope.changeName = function(pj, val){
     pj.name = val;

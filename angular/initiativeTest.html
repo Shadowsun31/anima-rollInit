@@ -34,11 +34,13 @@
         </span>
       </li>
       <li>
-        <input class="initGen width2 center" ng-model="newName" type="text">
-        <input class="initGen width1 center" ng-model="newNatura" type="Number">
-        <input class="initGen width1 center" ng-model="newBaseInit" type="Number">
-        <input class="initGen width1 center" ng-model="newModif" type="Number">
-        <button ng-click="addPJ()">+</button>
+        <form>
+          <input class="initGen width2 center" ng-model="newName" type="text" required>
+          <input class="initGen width1 center" ng-model="newNatura" type="Number">
+          <input class="initGen width1 center" ng-model="newBaseInit" type="Number" required>
+          <input class="initGen width1 center" ng-model="newModif" type="Number">
+          <input type="submit" ng-click="addPJ()" value="+">
+        </form>
       </li>
       <li><button ng-click="generateInit()">Generate Init</button></li>
     </ul>
@@ -46,6 +48,7 @@
 
     <ul>
       <li>
+        <!-- <span class="bold titleSpan width1">Current:</span> -->
         <span class="bold titleSpan width1">Order:</span>
         <span class="bold titleSpan width2">Name:</span>
         <span class="bold titleSpan width1">Init:</span>
@@ -53,6 +56,7 @@
         <span class="bold titleSpan">Details:</span>
       </li>
       <li ng-repeat="char in chars track by $index">
+        <!-- <span class="width1 center"><input type="radio" name="current" ng-value="$index+1"></span> -->
         <span class="width1 center">{{$index+1}}</span>
         <span class="width1">{{char.name}}</span>
         <span class="width1 center">{{char.final_init}}</span>
