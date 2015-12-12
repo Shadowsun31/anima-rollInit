@@ -2,10 +2,10 @@
 // 2015
 // Initiative Generator for Anima Beyond Fantasy RPG
 //
-"use strict";
-let pjs;
 
-let app = angular.module("app",[]);
+var pjs;
+
+var app = angular.module("app",[]);
 
 app.controller("initCtrl", ["$scope", function($scope){
   $scope.addPJ = function(){
@@ -41,7 +41,7 @@ app.controller("initCtrl", ["$scope", function($scope){
   }
   $scope.switchSelected = function(val){
     val = !val;
-    
+
   }
   $scope.changeName = function(pj, val){
     pj.name = val;
@@ -124,11 +124,11 @@ function rollInit(base_init, modif, natura, logEnabled){
   // natura     -> Int      | serve for limitation of roll or additional open roll
   // logEnabled -> boolean  | enable to log every details of rolls
 
-  let init = base_init;   // set init to base init
-  let openDice = 90;      // first value for open dices
-  let log = "";           // var to print the complete roll
-  let temp_init = randomIntInc(1, 100); // set the first roll
-  let third_dice = randomIntInc(1, 10); // set the roll for Additional open roll
+  var init = base_init;   // set init to base init
+  var openDice = 90;      // first value for open dices
+  var log = "";           // var to print the complete roll
+  var temp_init = randomIntInc(1, 100); // set the first roll
+  var third_dice = randomIntInc(1, 10); // set the roll for Additional open roll
 
   switch (temp_init) {
     case 1: // if 1 is rolled => Great Fumble
@@ -165,7 +165,7 @@ function rollInit(base_init, modif, natura, logEnabled){
 
   log += " + " + modif + " = " + init;
 
-  let initWithLog = {
+  var initWithLog = {
     "log" : log,
     "init": init
   };
@@ -177,9 +177,9 @@ function rollInit(base_init, modif, natura, logEnabled){
 }
 
 function rollInitFromJSON(json){
-  for (let i in json) {
-    let char = json[i];
-    let temp = rollInit(char.base_init, char.modif, char.natura, true);
+  for (var i in json) {
+    var char = json[i];
+    var temp = rollInit(char.base_init, char.modif, char.natura, true);
 
     char.detail_init = temp.log;
     char.final_init = temp.init;
